@@ -1414,9 +1414,6 @@ static int mmc_blk_issue_sanitize_rq(struct mmc_queue *mq,
 			goto out;
 	}
 
-	pr_debug("%s: %s - SANITIZE IN PROGRESS...\n",
-		mmc_hostname(card->host), __func__);
-
 	err = mmc_switch_ignore_timeout(card, EXT_CSD_CMD_SET_NORMAL,
 					EXT_CSD_SANITIZE_START, 1,
 					MMC_SANITIZE_REQ_TIMEOUT);
@@ -1425,9 +1422,6 @@ static int mmc_blk_issue_sanitize_rq(struct mmc_queue *mq,
 		pr_err("%s: %s - mmc_switch() with "
 		       "EXT_CSD_SANITIZE_START failed. err=%d\n",
 		       mmc_hostname(card->host), __func__, err);
-
-	pr_debug("%s: %s - SANITIZE COMPLETED\n", mmc_hostname(card->host),
-					     __func__);
 
 out:
 	blk_end_request(req, err, blk_rq_bytes(req));
