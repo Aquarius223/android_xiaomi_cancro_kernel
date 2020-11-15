@@ -4857,7 +4857,7 @@ static int mxt_proc_init(struct kobject *sysfs_node_parent) {
 	pr_debug("%s: driver_path:%s\n", __func__, driver_path);
 
 	// symlink /proc/touchscreen to input device
-	proc_entry_ts = proc_symlink("touchscreen", NULL, driver_path);
+	proc_entry_ts = proc_symlink("touchpanel", NULL, driver_path);
 	if (!proc_entry_ts) {
 		ret = -ENOMEM;
 		pr_err("%s: failed to symlink to touchscreen\n", __func__);
