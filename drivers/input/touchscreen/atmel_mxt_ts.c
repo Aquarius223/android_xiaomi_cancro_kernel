@@ -4842,7 +4842,6 @@ static int mxt_proc_init(struct kobject *sysfs_node_parent) {
 
 	struct proc_dir_entry *proc_entry_ts;
 
-	// allocate memory for input device path
 	driver_path = kzalloc(PATH_MAX, GFP_KERNEL);
 	if(!driver_path) {
 		ret = -ENOMEM;
@@ -4850,13 +4849,9 @@ static int mxt_proc_init(struct kobject *sysfs_node_parent) {
 		goto exit;
 	}
 
-	// store input device path
 	sprintf(driver_path, "/sys%s",
 			kobject_get_path(sysfs_node_parent, GFP_KERNEL));
 
-	pr_debug("%s: driver_path:%s\n", __func__, driver_path);
-
-	// symlink /proc/touchscreen to input device
 	proc_entry_ts = proc_symlink("touchpanel", NULL, driver_path);
 	if (!proc_entry_ts) {
 		ret = -ENOMEM;
