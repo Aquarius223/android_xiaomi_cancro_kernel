@@ -372,22 +372,13 @@ CFQ_CFQQ_FNS(wait_busy);
 #undef CFQ_CFQQ_FNS
 
 #ifdef CONFIG_CFQ_GROUP_IOSCHED
-#define cfq_log_cfqq(cfqd, cfqq, fmt, args...)	\
-	blk_add_trace_msg((cfqd)->queue, "cfq%d%c %s " fmt, (cfqq)->pid, \
-			cfq_cfqq_sync((cfqq)) ? 'S' : 'A', \
-			blkg_path(&(cfqq)->cfqg->blkg), ##args)
-
-#define cfq_log_cfqg(cfqd, cfqg, fmt, args...)				\
-	blk_add_trace_msg((cfqd)->queue, "%s " fmt,			\
-				blkg_path(&(cfqg)->blkg), ##args)       \
-
+#define cfq_log_cfqq(cfqd, cfqq, fmt, args...)
+#define cfq_log_cfqg(cfqd, cfqg, fmt, args...)
 #else
-#define cfq_log_cfqq(cfqd, cfqq, fmt, args...)	\
-	blk_add_trace_msg((cfqd)->queue, "cfq%d " fmt, (cfqq)->pid, ##args)
+#define cfq_log_cfqq(cfqd, cfqq, fmt, args...)
 #define cfq_log_cfqg(cfqd, cfqg, fmt, args...)		do {} while (0)
 #endif
-#define cfq_log(cfqd, fmt, args...)	\
-	blk_add_trace_msg((cfqd)->queue, "cfq " fmt, ##args)
+#define cfq_log(cfqd, fmt, args...)
 
 /* Traverses through cfq group service trees */
 #define for_each_cfqg_st(cfqg, i, j, st) \
